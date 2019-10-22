@@ -1,15 +1,14 @@
 import React from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
-import { allSites, logoutMutation } from '../queries/queries'
+import { GET_ALL_SITES, LOGOUT_MUTATION } from '../queries/queries'
 
 function Sites(props) {
-	const { data, loading, error } = useQuery(allSites, { refetchQueries: [{ query: allSites }] })
+	const { data, loading, error } = useQuery(GET_ALL_SITES)
 
-	const [logout] = useMutation(logoutMutation, {
+	const [logout] = useMutation(LOGOUT_MUTATION, {
 		variables: { token: localStorage.token },
 		onCompleted({ logout }) {
 			localStorage.removeItem('token')
-			// client.writeData({ data: { isLoggedIn: false } })
 			props.history.push('/register2')
 		}
 	})
@@ -19,11 +18,15 @@ function Sites(props) {
 
 	return (
 		<div>
-			{data.sites.sites.map(site => (
-				<div key={site.id}>
-					<p>{site.url}</p>
-				</div>
-			)) || 'no sites'}
+			{(data &&
+				data.sites &&
+				data.sites.sites &&
+				data.sites.sites.map(site => (
+					<div key={site.id}>
+						<p>{site.url}</p>
+					</div>
+				))) ||
+				'no sites'}
 			<button onClick={logout}>Logout</button>
 		</div>
 	)

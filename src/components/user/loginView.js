@@ -1,18 +1,20 @@
 import React, { useState } from 'react'
-import { useMutation } from '@apollo/react-hooks'
-import { signInMutation } from '../queries/queries'
+import { useMutation, useApolloClient } from '@apollo/react-hooks'
+import { SIGNIN_MUTATION, GET_ALL_SITES } from '../queries/queries'
 import { Button, FormGroup } from 'reactstrap'
 
 function LoginView(props) {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-
-	const [signin, { loading, error }] = useMutation(signInMutation, {
+	const client = useApolloClient()
+	const [signin, { loading, error }] = useMutation(SIGNIN_MUTATION, {
 		variables: { email, password },
 		onCompleted(signin) {
 			localStorage.setItem('token', signin.login)
+			client.writeData({ data: { isLoggedIn: true } })
 			props.history.push('/sites')
-		}
+		},
+		refetchQueries: [{ query: GET_ALL_SITES }]
 	})
 	if (loading) return <small>loading...</small>
 	if (error) return <small>error...</small>

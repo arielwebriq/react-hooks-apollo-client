@@ -37,7 +37,7 @@ function App(props) {
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
           <Switch>
-            <Redirect exact from="/" to={localStorage.token ? '/login' : '/register'} />
+            <Redirect exact from="/" to={localStorage.token ? '/login' : '/register2'} />
             <Route exact path="/register1" component={RegisterView1} />
             <Route exact path="/register2" component={RegisterView2} />
             <Route exact path="/login" component={LoginView} />

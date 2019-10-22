@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { Button, FormGroup } from 'reactstrap'
-import { signUpMutation } from '../queries/queries'
+import { SIGNUP_MUTATION } from '../queries/queries'
 
 function RegisterView2(props) {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
-	const [signup, { loading, error }] = useMutation(signUpMutation, {
+	const [signup, { loading, error }] = useMutation(SIGNUP_MUTATION, {
 		variables: { email, password },
 		onCompleted({ signup }) {
 			localStorage.setItem('token', signup.token)

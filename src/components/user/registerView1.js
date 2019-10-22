@@ -1,6 +1,6 @@
 import React from 'react'
 import { Mutation } from 'react-apollo'
-import { signUpMutation } from '../queries/queries'
+import { SIGNUP_MUTATION } from '../queries/queries'
 import { Button, FormGroup } from 'reactstrap'
 
 class RegisterView1 extends React.Component {
@@ -21,7 +21,7 @@ class RegisterView1 extends React.Component {
 		const { email, password } = this.state
 		return (
 			<Mutation
-				mutation={signUpMutation}
+				mutation={SIGNUP_MUTATION}
 				variables={{ email, password }}
 				onCompleted={data => this._confirm(data)}
 			>
