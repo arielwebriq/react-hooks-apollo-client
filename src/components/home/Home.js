@@ -3,7 +3,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks'
 import { allSites, logoutMutation } from '../queries/queries'
 
 function Sites(props) {
-	const { loading, data, error } = useQuery(allSites)
+	const { loading, data, error } = useQuery(allSites, { refetchQueries: [{ query: allSites }] })
 
 	const [logout] = useMutation(logoutMutation, {
 		variables: { token: localStorage.token },
