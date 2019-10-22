@@ -1,18 +1,7 @@
 import React from 'react'
 import { Mutation } from 'react-apollo'
-import gql from 'graphql-tag'
-
+import { signUpMutation } from '../queries/queries'
 import { Button, FormGroup } from 'reactstrap'
-
-const signUpMutation = gql`
-	mutation SignUpMutation($email: String!, $password: String!) {
-		signup(email: $email, password: $password) {
-			id
-			verificationCode
-			token
-		}
-	}
-`
 
 class RegisterView1 extends React.Component {
 	constructor(props) {

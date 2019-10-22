@@ -3,7 +3,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks'
 import { allSites, logoutMutation } from '../queries/queries'
 
 function Sites(props) {
-	const { loading, data, error } = useQuery(allSites, { refetchQueries: [{ query: allSites }] })
+	const { data, loading, error } = useQuery(allSites, { refetchQueries: [{ query: allSites }] })
 
 	const [logout] = useMutation(logoutMutation, {
 		variables: { token: localStorage.token },
@@ -15,7 +15,7 @@ function Sites(props) {
 	})
 
 	if (loading) return <small>Loading...</small>
-	if (error) return <small>Error</small>
+	if (error) return <small>You need to register or signup to see this page</small>
 
 	return (
 		<div>

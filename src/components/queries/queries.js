@@ -22,6 +22,7 @@ const logoutMutation = gql`
   }
 `
 
+// Query Sections
 const allSites = gql`
   query siteLists {
     sites(pageSize: 10) {
